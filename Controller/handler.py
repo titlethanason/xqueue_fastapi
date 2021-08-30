@@ -2,4 +2,6 @@ from Problem import *
 
 
 def handle(request):
-    return problem1.process()
+    file = request["file"]
+    filename = list(file.values())[0].split("/")[-1]
+    return problem1.process(filename)

@@ -51,7 +51,7 @@ def get_submission():
         time_elapsed = time.time() - start
         logging.info(f'Put result response ({res["key"]}): {outs.decode("utf-8")} using {time_elapsed} seconds')
         proc.kill()
-        print('Success put_result {res["key"]}')
+        print(f'Success put_result {res["key"]}')
         print(f'Time elapsed for {res["key"]}: {time_elapsed} seconds')
 
     except TimeoutExpired as err:
