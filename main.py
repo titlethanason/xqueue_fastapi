@@ -2,6 +2,7 @@ import logging
 from subprocess import PIPE, Popen, TimeoutExpired
 from fastapi import FastAPI, Request, BackgroundTasks
 import time
+from Controller import handler
 
 app = FastAPI()
 
@@ -22,8 +23,8 @@ def get_submission():
         if len(errs) != 0:
             raise Exception(f'Error fetching data from tutor-xqueue')
         logging.info(f'Queue detail: {outs.decode("utf-8")}')
-        print(f'Success fetching')
         proc.kill()
+        print(f'Success fetching')
 
         # eval output from tutor-xqueue
         try:
@@ -34,22 +35,24 @@ def get_submission():
         print(f'Success eval {res["key"]}')
 
         # process the queue detail
-        point = str(1)
-        is_true = str("true")
-        msg = str("Good job!")
+        result = handler.handle(res)
+        score = str(result["score"])
+        correct = str(result["correct"])
+        msg = str(result["msg"])
         logging.info(f'Grading detail ({res["key"]}):')
         print(f'Success grading {res["key"]}')
 
         # response back to the tutor-xqueue
-        proc = Popen(["tutor", "xqueue", "submissions", "grade", str(res["id"]), res["key"], point, is_true, msg],
+        proc = Popen(["tutor", "xqueue", "submissions", "grade", str(res["id"]), res["key"], score, correct, msg],
                      stdout=PIPE, stderr=PIPE)
         outs, errs = proc.communicate(timeout=10)
         if len(errs) != 0:
             raise Exception(f'Error put result of {res["key"]} in tutor-xqueue')
         time_elapsed = time.time() - start
         logging.info(f'Put result response ({res["key"]}): {outs.decode("utf-8")} using {time_elapsed} seconds')
-        print(f'Time elapsed for {res["key"]}: {time_elapsed} seconds')
         proc.kill()
+        print('Success put_result {res["key"]}')
+        print(f'Time elapsed for {res["key"]}: {time_elapsed} seconds')
 
     except TimeoutExpired as err:
         logging.error(f'Timeout in proc.communicate(): {err}')
@@ -71,7 +74,7 @@ async def home(request: Request):
 
 @app.post("/submit")
 async def submit(request: Request, bg: BackgroundTasks):
-    body = await request.body()
-    print(eval(body))
+    #body = await request.body()
+    #print(eval(body))
     bg.add_task(get_submission)
     return {"status": 1}
