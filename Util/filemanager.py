@@ -1,5 +1,6 @@
 import importlib.util
 import settings
+import secrets
 
 
 def load_module(filename, name="problem_module"):
@@ -9,5 +10,9 @@ def load_module(filename, name="problem_module"):
     return module
 
 
-def save_file(code=None):
-    return settings.SAVE_FILE_PATH
+def save_file(code, extension='py'):
+    filename = secrets.token_hex(16) + f'.{extension}'
+    path = settings.SAVE_FILE_PATH + filename
+    with open(path, 'w') as f:
+        f.write(code)
+    return filename

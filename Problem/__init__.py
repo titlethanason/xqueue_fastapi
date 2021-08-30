@@ -1,1 +1,1 @@
-__all__ = ['problem1']
+__all__ = ['problem1', 'problem2']

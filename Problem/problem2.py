@@ -2,7 +2,8 @@ from Util import filemanager
 import logging
 
 
-def process(filename):
+def process(code):
+    filename = filemanager.save_file(code)
     module = filemanager.load_module(filename, "hello")
     try:
         result = module.main()
@@ -12,3 +13,4 @@ def process(filename):
         print(f'Error at calling function in uploaded file: {err}')
 
     return {"correct": True, "score": 0.8, "msg": "almost perfect!"}
+
