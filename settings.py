@@ -1,1 +1,1 @@
-SAVE_FILE_PATH = "/home/title/xqueue_fastapi/fileuploaded/"
+SAVE_FILE_DIR = "/home/title/xqueue_fastapi/fileuploaded/"

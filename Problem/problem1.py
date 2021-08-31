@@ -5,10 +5,10 @@ import logging
 def process(filename):
     module = filemanager.load_module(filename, "hello")
     try:
-        result = module.main()
+        result = module.squared(10)
         print(f'Result from uploaded file: {result}')
     except (ValueError, AttributeError) as err:
         logging.info(f'Error at calling function in uploaded file: {err}')
         print(f'Error at calling function in uploaded file: {err}')
 
-    return {"correct": True, "score": 0.8, "msg": "almost perfect!"}
+    return {"correct": True, "score": 1, "msg": f'Correct (result of 10 squared is {result}'}
