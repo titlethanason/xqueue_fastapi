@@ -12,5 +12,5 @@ def process(code):
         logging.info(f'Error at calling function in uploaded file: {err}')
         print(f'Error at calling function in uploaded file: {err}')
 
-    return {"correct": True, "score": 1, "msg": f'Correct (result of 10 squared is {result}'}
+    return {"correct": True, "score": 1, "msg": f'Correct !! (result of 10 squared is {result})'}
 

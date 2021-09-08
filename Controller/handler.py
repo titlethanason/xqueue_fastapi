@@ -36,15 +36,15 @@ def _put_result(request_id, request_key, score, correct, msg):
     print(f'Success put_result {request_key}')
 
 
-def _grade(request):
-    problem_number = eval(request["body"]["grader_payload"])["problem_number"]
+def _grade(req):
+    problem_number = eval(req["body"]["grader_payload"])["problem_number"]
     if problem_number == 1:
-        file = request["file"]
+        file = req["file"]
         filename = list(file.values())[0].split("/")[-1]
         return problem1.process(filename)
 
     elif problem_number == 2:
-        code = request["body"]["student_response"]
+        code = req["body"]["student_response"]
         return problem2.process(code)
 
 
@@ -55,22 +55,23 @@ def process():
         outs = _get_queue()
 
         # eval output from tutor-xqueue
-        res = _eval_request(outs)
+        req = _eval_request(outs)
 
         # process the queue detail
-        result = _grade(res)
+        result = _grade(req)
         score = str(result["score"])
         correct = str(result["correct"])
         msg = str(result["msg"])
-        logging.info(f'Grading detail ({res["key"]}):')
-        print(f'Success grading {res["key"]}')
+        logging.info(f'Grading detail ({req["key"]}):')
+        print(f'Success grading {req["key"]}')
 
         # response back to the tutor-xqueue
-        _put_result(str(res["id"]), str(res["key"]), score, correct, msg)
+        _put_result(str(req["id"]), str(req["key"]), score, correct, msg)
 
         time_elapsed = time.time() - start
-        logging.info(f'Process {res["key"]} use {time_elapsed} seconds')
-        print(f'Time elapsed for {res["key"]}: {time_elapsed} seconds')
+        logging.info(f'Process {req["key"]} use {time_elapsed} seconds')
+        logging.info(f'Process {req["key"]} use {time_elapsed} seconds')
+        print(f'Time elapsed for {req["key"]}: {time_elapsed} seconds')
 
     except TimeoutExpired as err:
         logging.error(f'Timeout in proc.communicate(): {err}')
