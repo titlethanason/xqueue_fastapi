@@ -47,6 +47,12 @@ def _grade(req):
         code = req["body"]["student_response"]
         return problem2.process(code)
 
+    elif problem_number == 3:
+        file = req["file"]
+        filename = list(file.values())[0].split("/")[-1]
+        payload = eval(req["body"]["grader_payload"])
+        return problem3.process(filename, payload["assignment_id"], payload["problem_id"])
+
 
 def process():
     start = time.time()
@@ -62,14 +68,13 @@ def process():
         score = str(result["score"])
         correct = str(result["correct"])
         msg = str(result["msg"])
-        logging.info(f'Grading detail ({req["key"]}):')
+        logging.info(f'Grading detail ({req["key"]}): {result}')
         print(f'Success grading {req["key"]}')
 
         # response back to the tutor-xqueue
         _put_result(str(req["id"]), str(req["key"]), score, correct, msg)
 
         time_elapsed = time.time() - start
-        logging.info(f'Process {req["key"]} use {time_elapsed} seconds')
         logging.info(f'Process {req["key"]} use {time_elapsed} seconds')
         print(f'Time elapsed for {req["key"]}: {time_elapsed} seconds')
 
