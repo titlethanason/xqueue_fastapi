@@ -1,1 +1,1 @@
-__all__ = ['filemanager']
+__all__ = ['filemanager', 'nbmanager']
