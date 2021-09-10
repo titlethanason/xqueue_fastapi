@@ -39,7 +39,7 @@ def _put_result(request_id, request_key, score, correct, msg):
 def _grade(req):
     problem_number = eval(req["body"]["grader_payload"])["problem_number"]
     if problem_number == 1:
-        file = req["file"]
+        file = req["files"]
         filename = list(file.values())[0].split("/")[-1]
         return problem1.process(filename)
 
