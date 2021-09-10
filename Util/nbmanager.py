@@ -6,13 +6,13 @@ import secrets
 
 # create a custom config object to specify options for nbgrader
 config = Config()
-config.CourseDirectory.course_id = settings.NBGRADER_COURSEDIR
-config.CourseDirectory.db_url = "sqlite:///" + settings.NBGRADER_COURSEDIR + "gradebook.db"
-config.CourseDirectory.source_directory = settings.NBGRADER_COURSEDIR + "source"
-config.CourseDirectory.release_directory = settings.NBGRADER_COURSEDIR + "release"
-config.CourseDirectory.submitted_directory = settings.NBGRADER_COURSEDIR + "submitted"
-config.CourseDirectory.autograded_directory = settings.NBGRADER_COURSEDIR + "autograded"
-config.CourseDirectory.feedback_directory = settings.NBGRADER_COURSEDIR + "feedback"
+config.CourseDirectory.course_id = settings.NBGRADER_DIR
+config.CourseDirectory.db_url = "sqlite:///" + settings.NBGRADER_DIR + "gradebook.db"
+config.CourseDirectory.source_directory = settings.NBGRADER_DIR + "source"
+config.CourseDirectory.release_directory = settings.NBGRADER_DIR + "release"
+config.CourseDirectory.submitted_directory = settings.NBGRADER_DIR + "submitted"
+config.CourseDirectory.autograded_directory = settings.NBGRADER_DIR + "autograded"
+config.CourseDirectory.feedback_directory = settings.NBGRADER_DIR + "feedback"
 
 api = NbGraderAPI(config=config)
 
