@@ -48,7 +48,7 @@ def _grade(req):
         return problem2.process(code)
 
     elif problem_number == 3:
-        file = req["file"]
+        file = req["files"]
         filename = list(file.values())[0].split("/")[-1]
         payload = eval(req["body"]["grader_payload"])
         return problem3.process(filename, payload["assignment_id"], payload["problem_id"])
