@@ -1,5 +1,4 @@
 from Util import nbmanager
-import logging
 
 
 def process(filename, assignment_id="test001", problem_id="test001_1"):

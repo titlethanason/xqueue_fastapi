@@ -1,1 +1,1 @@
-__all__ = ['filemanager', 'nbmanager']
+__all__ = ['filemanager', 'nbmanager', 'tutor_interface']
