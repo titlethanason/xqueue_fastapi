@@ -52,7 +52,7 @@ def process():
         logging.info(f'Grading detail ({req["key"]}): {result}')
         print(f'Success grading {req["key"]}')
 
-        # response back to the tutor-xqueue
+        # response back to xqueue
         _put_result(str(req["id"]), str(req["key"]), result["score"], result["correct"], result["msg"])
 
         time_elapsed = time.time() - start

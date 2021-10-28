@@ -1,0 +1,2 @@
+USERS = {"{{ XQUEUE_AUTH_USERNAME }}": "{{ XQUEUE_AUTH_PASSWORD}}"}
+XQUEUES = {"openedx": None}
