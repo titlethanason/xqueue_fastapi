@@ -18,9 +18,9 @@ def main(argv):
         ret = nbmanager.get_submission(assignment_id, user_id)
         print(ret)
     else:
-        print('usage: nbmanager.py generate <assignment_id>')
-        print('       nbmanager.py autograde <assignment_id> <user_id>')
-        print('       nbmanager.py get_submission <assignment_id> <user_id>')
+        print('usage: manage.py generate <assignment_id>')
+        print('       manage.py autograde <assignment_id> <user_id>')
+        print('       manage.py get_submission <assignment_id> <user_id>')
 
 
 if __name__ == '__main__':
