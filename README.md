@@ -75,6 +75,12 @@ tutor_config = {
       - "5000:80" # PORT จะต้องตรงกับขั้นตอนที่1
 ```
 **Note: $(tutor config printroot)/data/xqueue/media จะเป็น location default สำหรับไฟล์ที่ถูกอัพโหลดผ่านทาง xqueue
+
+ทำการ restart container
+```
+tutor local stop && tutor local start -d
+```
+
 ### 4. การสร้าง Problem ใน Open edX
 ตัว application ตัวนี้มีการใช้ตัว library ของ [nbgrader](https://nbgrader.readthedocs.io/) สำหรับการตรวจข้อสอบที่เป็น jupyter notebook ฉะนั้นสำหรับการ submit ไฟล์ที่เป็น jupyter notebook (.ipynb) จะต้องส่งค่าบางอย่างมาบอกกับตัว application ด้วยว่าไฟล์ที่ส่งมานั้นเป็นไฟล์ที่ต้องการใช้ nbgrader ในการตรวจ (เบื้องต้นตอนนี้จะรองรับไฟล์เดียวเท่านั้นคือ [test001_1.ipynb](https://github.com/titlethanason/xqueue_fastapi/blob/master/nbgrader_workspace/release/test001/test001_1.ipynb))
 
